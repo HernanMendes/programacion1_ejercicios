@@ -1,5 +1,5 @@
 import random
-
+import numpy as np
 
 media_error = 0
 desvio_error = 0.2
@@ -7,7 +7,10 @@ temperatura = 37.5
 
 
 def medir_temp(n):
-    return [random.normalvariate(mu=temperatura, sigma=desvio_error) for i in range(n)]
+    temperaturas = [random.normalvariate(mu=temperatura, sigma=desvio_error) for i in range(n)]
+    temp_array = np.array(temperaturas)
+    np.save('../Data/temperaturas.npy', temp_array)
+    return temperaturas
 
 
 def resumen_temp(n):
@@ -26,7 +29,7 @@ def resumen_temp(n):
 
 
 def main():
-    n = 100000
+    n = 999
     maximo, minimo, promedio, mediana = resumen_temp(n)
     print(f"Maximo: {maximo}")
     print(f"Minimo: {minimo}")
